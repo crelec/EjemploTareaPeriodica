@@ -9,17 +9,19 @@ void Hilo_Tarea1 (void);
 void Hilo_Tarea2 (void);
 
 // Variables Pines
-Thread Tarea1(osPriorityNormal, OS_STACK_SIZE, nullptr, nullptr); //prioridad 1
-Thread Tarea2(osPriorityNormal, OS_STACK_SIZE, nullptr, nullptr);
+DigitalOut led(PA_5);
+//Thread Tarea1(osPriorityNormal, OS_STACK_SIZE, nullptr, nullptr); //prioridad 1
+//Thread Tarea2(osPriorityNormal, OS_STACK_SIZE, nullptr, nullptr);
+
+Thread Tarea1; 
+Thread Tarea2;
 
 //static BufferedSerial serial_port(USBTX, USBRX);
 static BufferedSerial serial_port(PA_2, PA_3);
-char mensaje[20];
+char mensaje[17];
 
 int main()
 {
-    DigitalOut led(PA_5);
-    
     serial_port.write("Arranque del programa.\n\r",24);
        
     Tarea1.start(Hilo_Tarea1);
@@ -34,8 +36,8 @@ int main()
 
 void Hilo_Tarea1(void)
 {
-const char Men_Tarea1[20] = "Tarea 1 Corre \n\r";
-volatile int conteo;
+const char Men_Tarea1[17] = "Tarea 1 Corre.\n\r";
+
     while(true)
     {
         sprintf(mensaje,Men_Tarea1);//formatear una cadena de caracteres
@@ -47,8 +49,8 @@ volatile int conteo;
 
 void Hilo_Tarea2(void)
 {
-const char Men_Tarea2[20] = "Tarea 2 Corre \n\r";
-volatile int conteo;
+const char Men_Tarea2[17] = "Tarea 2 Corre.\n\r";
+
     while(true)
     {
         sprintf(mensaje,Men_Tarea2);//formatear una cadena de caracteres
